@@ -15,10 +15,19 @@ enum MealDBUrlEndpoints: String {
 struct MealAPICaller {
     func fetchMealsList() async throws -> [Meal] {
         guard let url = URL(string: MealDBUrlEndpoints.mealsList.rawValue) else {
-            return []
+            throw URLError(.badURL)
         }
         let (data, _) = try await URLSession.shared.data(from: url)
-        let results = try JSONDecoder().decode(MealsResult.self, from: data)
-        return results.meals
+        let response = try JSONDecoder().decode(MealListResponse.self, from: data)
+        return response.meals
+    }
+
+    func fetchMealDetails(mealId: String) async throws -> [MealDetail] {
+        guard let url = URL(string: MealDBUrlEndpoints.mealDetails.rawValue + mealId) else {
+            throw URLError(.badURL)
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let response = try JSONDecoder().decode(MealDetailResponse.self, from: data)
+        return response.meals
     }
 }
