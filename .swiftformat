@@ -1,0 +1,6 @@
+# format options
+--swiftversion 5.7
+
+# rules
+--enable isEmpty
+--enable blankLineAfterImports
