@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+/// A View that displays a detail view for a selected meal
 struct MealDetailView: View {
+    // MARK: - Properties
+
     @State private var viewModel: ViewModel
+
+    // MARK: - Init
 
     init(mealId: String) {
         _viewModel = State(initialValue: ViewModel(mealId: mealId))
     }
+
+    // MARK: - View
 
     var body: some View {
         ScrollView {
@@ -46,26 +53,34 @@ struct MealDetailView: View {
                 await viewModel.getMealDetails()
             }
         })
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 extension MealDetailView {
+    /// A View Model for `MealDetailView`
     @Observable
     final class ViewModel {
+        // MARK: - Properties
+
         let mealId: String
         var mealDetails = [MealDetail]()
         let apiCaller = MealAPICaller()
+
+        // MARK: - Init
 
         init(mealId: String) {
             self.mealId = mealId
         }
 
+        // MARK: - Methods
+
+        /// Fetches the details for a specific meal asynchronously
+        @MainActor
         func getMealDetails() async {
             do {
                 mealDetails = try await apiCaller.fetchMealDetails(mealId: mealId)
             } catch {
-                print("MealDetailViewModel - error getting meals list: \(error)")
+                print("MealDetailViewModel - error getting meals list: \(error.localizedDescription)")
             }
         }
     }
