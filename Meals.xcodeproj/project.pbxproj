@@ -46,7 +46,6 @@
 				48159FDD2C62CD7100E28F7D /* MealsApp.swift */,
 				48159FDF2C62CD7100E28F7D /* MealListView.swift */,
 				4800B0FB2C6347F300A8E2A6 /* MealDetailView.swift */,
-				4800B0FD2C65E5F200A8E2A6 /* Launch Screen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -74,6 +73,7 @@
 				482A49B22C63091400E7EE42 /* Models */,
 				4800B0FA2C6347D700A8E2A6 /* Views */,
 				48159FE12C62CD7200E28F7D /* Assets.xcassets */,
+				4800B0FD2C65E5F200A8E2A6 /* Launch Screen.storyboard */,
 				48159FE32C62CD7200E28F7D /* Preview Content */,
 			);
 			path = Meals;
